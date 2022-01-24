@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <h1 style="color: red; font-size: 26px">Pedido confirmado!</h1>
+        <p><span th:text="${pedido.cliente.nome}"></span>, seu pedido foi confirmado pelo restaurante e já
+            esta sendo preparado.</p>
+        <h2 style="font-size: 20px" th:text="${pedido.restaurante.nome}"></h2>
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0"
+               style="max-width: 600px; color: #6F6F6F">
+
+                <tr th:each="item : ${pedido.itens}">
+                    <td style="padding: 10px 0">
+                        <span th:text="${item.quantidade}"></span>x <span th:text="${item.produto.nome}"></span></td>
+                    <td style="width: 30px" th:text="${#numbers.formatCurrency(item.precoTotal)}"></td>
+                </tr>
+
+            <tr>
+                <td style="padding: 10px 0">Frete</td>
+                <td th:text="${#numbers.formatCurrency(pedido.taxaFrete)}"></td>
+            </tr>
+            <tr style="font-weight: bold">
+                <td style="padding: 10px 0">Total</td>
+                <td th:text="${#numbers.formatCurrency(pedido.valorTotal)}"></td>
+            </tr>
+        </table>
+
+        <h2 style="font-size: 20px">Forma de pagamento</h2>
+        <p style="color: #6F6F6F" th:text="${pedido.formaPagamento.descricao}"></p>
+    </body>
+</html>
